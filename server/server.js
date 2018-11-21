@@ -19,13 +19,12 @@ io.on('connection', (socket)=>{
     });
 
     socket.on('createMessage', (msg)=>{
-        console.log('message received...', msg);            
-    });
-
-    socket.emit('newMessage', {
-        from: "server",
-        text: "new message received",
-        createdAt: new Date()
+        console.log('message received...', msg);     
+        io.emit('newMessage', {
+            from: msg.from,
+            text: msg.text,
+            createdAt: new Date().getTime()
+        });     
     });
 
 });
